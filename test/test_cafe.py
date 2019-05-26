@@ -1,7 +1,7 @@
 import pytest
 
 from cafe.money import Krona
-from cafe.cafe import Item, Order
+from cafe.cafe import Item, Order, NotEnoughStock
 
 expected_cafe_one_prices = [
     ("coffee", Krona(5)),
@@ -47,12 +47,13 @@ def test_cafe_two_can_run_different_deals(cafe_two):
 
 
 def test_cafes_throw_value_errors_if_they_dont_have_enough_stock(cafe_one):
-    with pytest.raises(ValueError) as excinfo:
+    with pytest.raises(NotEnoughStock) as excinfo:
         cafe_one.place_order(Order(["fancy coffee"] * 20))
     assert "There's not enough fancy coffee in stock" in str(excinfo.value)
+
 
 def test_placing_orders_lowers_stock(cafe_one):
     # The cafe starts with 10 coffees so this should be okay
     cafe_one.place_order(Order(["fancy coffee"] * 10))
-    with pytest.raises(ValueError):
+    with pytest.raises(NotEnoughStock):
         cafe_one.place_order(Order(["fancy coffee"]))

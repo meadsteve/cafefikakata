@@ -26,6 +26,10 @@ class Receipt:
     total: Krona
 
 
+class NotEnoughStock(ValueError):
+    pass
+
+
 class Cafe:
     prices: Dict[Item, Krona]
     deals: Dict[Item, Deal]
@@ -49,7 +53,7 @@ class Cafe:
 
     def _order_item(self, item: Item, quantity: int) -> Krona:
         if quantity > self.stock[item]:
-            raise ValueError(f"There's not enough {item} in stock")
+            raise NotEnoughStock(f"There's not enough {item} in stock")
         self.stock[item] -= quantity
         full_price = Deal(1, self.ask_price(item))
         deal = self.deals.get(item, full_price)
