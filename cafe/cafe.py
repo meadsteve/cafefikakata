@@ -27,7 +27,7 @@ class Cafe(Generic[LocalCurrency]):
         except KeyError:
             raise UnknownItem(f"{item} is not on the menu")
 
-    def place_order(self, order: Order) -> Receipt:
+    def place_order(self, order: Order) -> Receipt[LocalCurrency]:
         grouped_items = Counter(order.items).items()
         prices = [self._order_item(item, quantity) for (item, quantity) in grouped_items]
         return Receipt(total=money.total(prices))

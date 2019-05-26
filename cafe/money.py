@@ -29,5 +29,5 @@ class BritishPounds(Currency):
 SpecificCurrency = TypeVar('SpecificCurrency', bound=Currency)
 
 
-def total(amounts: List[SpecificCurrency]) -> Currency:
+def total(amounts: List[SpecificCurrency]) -> SpecificCurrency:
     return reduce(lambda t, x: t + x, amounts)
