@@ -34,16 +34,16 @@ class Cafe:
         self.prices = prices
         self.deals = deals
 
-    def get_price(self, item: Item) -> Krona:
+    def ask_price(self, item: Item) -> Krona:
         return self.prices[item]
 
-    def get_receipt(self, order: Order) -> Receipt:
+    def place_order(self, order: Order) -> Receipt:
         grouped_items = Counter(order.items).items()
         prices = [self._get_total(item, quantity) for (item, quantity) in grouped_items]
         return Receipt(total=money.total(prices))
 
     def _get_total(self, item: Item, quantity: int) -> Krona:
-        full_price = Deal(1, self.get_price(item))
+        full_price = Deal(1, self.ask_price(item))
         deal = self.deals.get(item, full_price)
         return deal.price * (quantity // deal.quantity) \
             + full_price.price * (quantity % deal.quantity)
