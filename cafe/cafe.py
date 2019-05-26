@@ -1,8 +1,8 @@
+from collections import Counter
 from dataclasses import dataclass
-from typing import Dict, Optional, List
+from typing import Dict, List
 
 from cafe import money
-from cafe.grouping import group_items
 from cafe.money import Krona
 
 
@@ -38,7 +38,7 @@ class Cafe:
         return self.prices[item]
 
     def get_receipt(self, order: Order) -> Receipt:
-        grouped_items = group_items(order.items)
+        grouped_items = Counter(order.items).items()
         prices = [self._get_total(item, quantity) for (item, quantity) in grouped_items]
         return Receipt(total=money.total(prices))
 
