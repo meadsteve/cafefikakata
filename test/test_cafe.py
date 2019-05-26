@@ -1,7 +1,9 @@
 import pytest
 
 from cafe.money import Krona
-from cafe.cafe import Item, Order, Cafe
+from cafe.cafe import Cafe
+from cafe.orders import Order
+from cafe.items import Item
 from cafe.exceptions import NotEnoughStock, UnknownItem
 
 expected_cafe_one_prices = [

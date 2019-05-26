@@ -1,6 +1,7 @@
 import pytest
 
-from cafe.cafe import Cafe, Deal
+from cafe.cafe import Cafe
+from cafe.items import Deal
 from cafe.money import Krona
 
 

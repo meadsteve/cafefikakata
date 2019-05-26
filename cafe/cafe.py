@@ -1,30 +1,11 @@
 from collections import Counter
-from dataclasses import dataclass
-from typing import Dict, List
+from typing import Dict
 
 from cafe import money
 from cafe.exceptions import NotEnoughStock, UnknownItem
+from cafe.items import Item, Deal
 from cafe.money import Krona
-
-
-# Create a type for item. For now we'll use alias string for it
-Item = str
-
-
-@dataclass
-class Deal:
-    quantity: int
-    price: Krona
-
-
-@dataclass
-class Order:
-    items: List[Item]
-
-
-@dataclass
-class Receipt:
-    total: Krona
+from cafe.orders import Order, Receipt
 
 
 class Cafe:
