@@ -1,7 +1,7 @@
 import pytest
 
 from cafe.money import Krona
-from cafe.cafe import Item, Order, NotEnoughStock
+from cafe.cafe import Item, Order, NotEnoughStock, UnknownItem, Cafe
 
 expected_cafe_one_prices = [
     ("coffee", Krona(5)),
@@ -57,3 +57,20 @@ def test_placing_orders_lowers_stock(cafe_one):
     cafe_one.place_order(Order(["fancy coffee"] * 10))
     with pytest.raises(NotEnoughStock):
         cafe_one.place_order(Order(["fancy coffee"]))
+
+
+def test_cafes_cant_be_stocked_with_things_not_on_the_menu(cafe_one: Cafe):
+    with pytest.raises(UnknownItem):
+        cafe_one.add_stock("bananas", 5)
+
+
+def test_customers_cant_ask_the_price_of_items_not_on_the_menu(cafe_one: Cafe):
+    with pytest.raises(UnknownItem):
+        cafe_one.ask_price("flintstones chewable morphine")
+
+
+def test_customers_cant_order_items_not_on_the_menu(cafe_one: Cafe):
+    with pytest.raises(UnknownItem):
+        cafe_one.place_order(Order(["coffee", "flintstones chewable morphine"]))
+
+

@@ -30,6 +30,10 @@ class NotEnoughStock(ValueError):
     pass
 
 
+class UnknownItem(KeyError):
+    pass
+
+
 class Cafe:
     prices: Dict[Item, Krona]
     deals: Dict[Item, Deal]
@@ -41,7 +45,10 @@ class Cafe:
         self.stock = {item: 0 for item in self.prices.keys()}
 
     def ask_price(self, item: Item) -> Krona:
-        return self.prices[item]
+        try:
+            return self.prices[item]
+        except KeyError:
+            raise UnknownItem(f"{item} is not on the menu")
 
     def place_order(self, order: Order) -> Receipt:
         grouped_items = Counter(order.items).items()
@@ -49,10 +56,19 @@ class Cafe:
         return Receipt(total=money.total(prices))
 
     def add_stock(self, item: Item, quantity: int) -> None:
-        self.stock[item] += quantity
+        try:
+            self.stock[item] += quantity
+        except KeyError:
+            raise UnknownItem(f"This shop can't stock {item}")
+
+    def _enough_stock(self, item: Item, desired_quantity: int):
+        try:
+            return desired_quantity <= self.stock[item]
+        except KeyError:
+            raise UnknownItem(f"{item} is not on the menu")
 
     def _order_item(self, item: Item, quantity: int) -> Krona:
-        if quantity > self.stock[item]:
+        if not self._enough_stock(item, quantity):
             raise NotEnoughStock(f"There's not enough {item} in stock")
         self.stock[item] -= quantity
         full_price = Deal(1, self.ask_price(item))
