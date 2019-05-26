@@ -29,6 +29,10 @@ different prices
 If you only extended the above for prices do
 the same for deals
 
+### Requirement Five - Stock levels
+A shop has limited stock. When it's sold out orders can't be
+placed for that time.
+
 ## Considerations
 Part of the focus of this Kata is using the type system 
 with mypy. 
