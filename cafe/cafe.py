@@ -46,8 +46,7 @@ class Cafe:
         return Receipt(total=money.total(prices))
 
     def _get_total(self, item: Item, quantity: int) -> Krona:
-        deal = self.deals.get(item)
-        if deal:
-            return deal.price * (quantity // deal.quantity) \
-                   + self.get_price(item) * (quantity % deal.quantity)
-        return self.get_price(item) * quantity
+        full_price = Deal(1, self.get_price(item))
+        deal = self.deals.get(item, full_price)
+        return deal.price * (quantity // deal.quantity) \
+            + full_price.price * (quantity % deal.quantity)
