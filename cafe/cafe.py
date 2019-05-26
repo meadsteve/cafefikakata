@@ -3,6 +3,7 @@ from dataclasses import dataclass
 from typing import Dict, List
 
 from cafe import money
+from cafe.exceptions import NotEnoughStock, UnknownItem
 from cafe.money import Krona
 
 
@@ -24,14 +25,6 @@ class Order:
 @dataclass
 class Receipt:
     total: Krona
-
-
-class NotEnoughStock(ValueError):
-    pass
-
-
-class UnknownItem(KeyError):
-    pass
 
 
 class Cafe:
