@@ -50,3 +50,9 @@ def test_cafes_throw_value_errors_if_they_dont_have_enough_stock(cafe_one):
     with pytest.raises(ValueError) as excinfo:
         cafe_one.place_order(Order(["fancy coffee"] * 20))
     assert "There's not enough fancy coffee in stock" in str(excinfo.value)
+
+def test_placing_orders_lowers_stock(cafe_one):
+    # The cafe starts with 10 coffees so this should be okay
+    cafe_one.place_order(Order(["fancy coffee"] * 10))
+    with pytest.raises(ValueError):
+        cafe_one.place_order(Order(["fancy coffee"]))
