@@ -21,3 +21,9 @@ def test_a_cafe_can_give_you_a_receipt_for_the_order():
     order = Order(["coffee", "coffee", "kanelbulle"])
     receipt = cafe.get_receipt(order)
     assert receipt.total == Krona(20)
+
+
+def test_a_cafe_can_run_special_offers():
+    cafe = Cafe()
+    order = Order(["kanelbulle", "kanelbulle", "kanelbulle"])
+    assert cafe.get_receipt(order).total == Krona(25)

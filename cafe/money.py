@@ -13,6 +13,9 @@ class Krona:
         if isinstance(other, Krona):
             return Krona(self.amount + other.amount)
 
+    def __mul__(self, other):
+        return Krona(self.amount * other)
+
 
 def total(amounts: List[Krona]) -> Krona:
     return reduce(lambda t, x: t + x, amounts)
