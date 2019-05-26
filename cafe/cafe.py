@@ -1,12 +1,13 @@
 from collections import Counter
-from typing import Dict, Generic, TypeVar, List
+from typing import Dict, Generic, TypeVar, Type
+
+from more_itertools import first
 
 from cafe import money
 from cafe.exceptions import NotEnoughStock, UnknownItem
 from cafe.items import Item, Deal
 from cafe.money import Currency
 from cafe.orders import Order, Receipt
-
 
 LocalCurrency = TypeVar('LocalCurrency', bound=Currency)
 
@@ -41,6 +42,10 @@ class Cafe(Generic[LocalCurrency]):
     @property
     def is_open(self):
         return any([item_stock > 0 for (_, item_stock) in self._stock.items()])
+
+    @property
+    def currency(self) -> Type[LocalCurrency]:
+        return type(first(self._prices.values()))
 
     def _enough_stock(self, item: Item, desired_quantity: int):
         try:

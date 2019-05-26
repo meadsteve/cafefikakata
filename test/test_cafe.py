@@ -88,3 +88,7 @@ def test_you_can_also_order_from_british_cafes(british_cafe: Cafe[BritishPounds]
     order = Order(["coffee", "coffee"])
     assert british_cafe.place_order(order).total == BritishPounds(2)
 
+
+def test_we_can_find_out_what_currency_a_cafe_takes(british_cafe: Cafe, cafe_one: Cafe):
+    assert british_cafe.currency == BritishPounds
+    assert cafe_one.currency == Krona
