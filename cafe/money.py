@@ -4,17 +4,21 @@ from typing import List
 
 
 @dataclass
-class Krona:
+class Currency:
     amount: int
 
     def __add__(self, other):
         if other == 0:
             return self
-        if isinstance(other, Krona):
-            return Krona(self.amount + other.amount)
+        if type(other) == type(self):
+            return self.__class__(self.amount + other.amount)
 
     def __mul__(self, other):
-        return Krona(self.amount * other)
+        return self.__class__(self.amount * other)
+
+
+class Krona(Currency):
+    pass
 
 
 def total(amounts: List[Krona]) -> Krona:
