@@ -27,15 +27,12 @@ class Receipt:
 
 
 class Cafe:
-    prices: Dict[Item, Krona] = {
-        "coffee": Krona(5),
-        "fancy coffee": Krona(8),
-        "kanelbulle": Krona(10)
-    }
+    prices: Dict[Item, Krona]
+    deals: Dict[Item, Deal]
 
-    deals: Dict[Item, Deal] = {
-        "kanelbulle": Deal(3, Krona(25))
-    }
+    def __init__(self, prices: Dict[Item, Krona], deals: Dict[Item, Deal]):
+        self.prices = prices
+        self.deals = deals
 
     def get_price(self, item: Item) -> Krona:
         return self.prices[item]
