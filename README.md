@@ -31,5 +31,8 @@ the same for deals
 
 ## Considerations
 Part of the focus of this Kata is using the type system 
-with mypy. When defining your functions and classes stop
-start to think about what types they will receive and output.
+with mypy. 
+
+When defining your functions and classes start to think 
+about what types they will receive and output. Dataclasses 
+added in 3.7 can also help with this.
