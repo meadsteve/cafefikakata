@@ -44,3 +44,9 @@ def test_a_cafe_can_run_special_offers(order: Order, expected_price: Krona, cafe
 
 def test_cafe_two_can_run_different_deals(cafe_two):
     assert cafe_two.place_order(Order(["fancy coffee", "fancy coffee"])).total == Krona(15)
+
+
+def test_cafes_throw_value_errors_if_they_dont_have_enough_stock(cafe_one):
+    with pytest.raises(ValueError) as excinfo:
+        cafe_one.place_order(Order(["fancy coffee"] * 20))
+    assert "There's not enough fancy coffee in stock" in str(excinfo.value)
