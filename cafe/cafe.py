@@ -61,6 +61,10 @@ class Cafe:
         except KeyError:
             raise UnknownItem(f"This shop can't stock {item}")
 
+    @property
+    def is_open(self):
+        return any([item_stock > 0 for (_, item_stock) in self._stock.items()])
+
     def _enough_stock(self, item: Item, desired_quantity: int):
         try:
             return desired_quantity <= self._stock[item]

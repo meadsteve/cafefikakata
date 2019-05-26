@@ -20,3 +20,9 @@ def cafe_two() -> Cafe:
     cafe.add_stock("coffee", 10)
     cafe.add_stock("fancy coffee", 10)
     return cafe
+
+
+@pytest.fixture
+def cafe_without_stock() -> Cafe:
+    return Cafe({"coffee": Krona(2), "fancy coffee": Krona(10), }, {"fancy coffee": Deal(2, Krona(15))})
+

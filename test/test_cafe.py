@@ -59,6 +59,13 @@ def test_placing_orders_lowers_stock(cafe_one):
         cafe_one.place_order(Order(["fancy coffee"]))
 
 
+def test_cafes_with_stock_are_open(cafe_one: Cafe):
+    assert cafe_one.is_open
+
+
+def test_cafes_without_stock_are_closed(cafe_without_stock: Cafe):
+    assert not cafe_without_stock.is_open
+
 def test_cafes_cant_be_stocked_with_things_not_on_the_menu(cafe_one: Cafe):
     with pytest.raises(UnknownItem):
         cafe_one.add_stock("bananas", 5)
