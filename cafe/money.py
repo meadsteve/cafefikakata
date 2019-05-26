@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 from functools import reduce
-from typing import List
+from typing import List, TypeVar
 
 
 @dataclass
@@ -26,5 +26,8 @@ class BritishPounds(Currency):
     pass
 
 
-def total(amounts: List[Krona]) -> Krona:
+SpecificCurrency = TypeVar('SpecificCurrency', bound=Currency)
+
+
+def total(amounts: List[SpecificCurrency]) -> Currency:
     return reduce(lambda t, x: t + x, amounts)

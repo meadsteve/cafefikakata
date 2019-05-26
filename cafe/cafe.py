@@ -1,24 +1,27 @@
 from collections import Counter
-from typing import Dict
+from typing import Dict, Generic, TypeVar, List
 
 from cafe import money
 from cafe.exceptions import NotEnoughStock, UnknownItem
 from cafe.items import Item, Deal
-from cafe.money import Krona
+from cafe.money import Currency
 from cafe.orders import Order, Receipt
 
 
-class Cafe:
-    _prices: Dict[Item, Krona]
+LocalCurrency = TypeVar('LocalCurrency', bound=Currency)
+
+
+class Cafe(Generic[LocalCurrency]):
+    _prices: Dict[Item, LocalCurrency]
     _deals: Dict[Item, Deal]
     _stock: Dict[Item, int]
 
-    def __init__(self, prices: Dict[Item, Krona], deals: Dict[Item, Deal]):
+    def __init__(self, prices: Dict[Item, LocalCurrency], deals: Dict[Item, Deal[LocalCurrency]]):
         self._prices = prices
         self._deals = deals
         self._stock = {item: 0 for item in self._prices.keys()}
 
-    def ask_price(self, item: Item) -> Krona:
+    def ask_price(self, item: Item) -> LocalCurrency:
         try:
             return self._prices[item]
         except KeyError:
@@ -45,7 +48,7 @@ class Cafe:
         except KeyError:
             raise UnknownItem(f"{item} is not on the menu")
 
-    def _order_item(self, item: Item, quantity: int) -> Krona:
+    def _order_item(self, item: Item, quantity: int) -> LocalCurrency:
         if not self._enough_stock(item, quantity):
             raise NotEnoughStock(f"There's not enough {item} in stock")
         self._stock[item] -= quantity
