@@ -36,6 +36,12 @@ placed for that time.
 ### Requirement Six - Closing down
 When a cafe has no stock of any kind it closes down.
 
+### Requirement Seven - Let's take fika international
+All the previous requirements dealt in Krona. 
+Now we want to launch in new countries. Each cafe
+should only work in a single currency. 
+
+
 ## Considerations
 Part of the focus of this Kata is using the type system 
 with mypy. 
