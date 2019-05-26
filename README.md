@@ -30,8 +30,11 @@ If you only extended the above for prices do
 the same for deals
 
 ### Requirement Five - Stock levels
-A shop has limited stock. When it's sold out orders can't be
+A cafe has limited stock. When it's sold out orders can't be
 placed for that time.
+
+### Requirement Six - Closing down
+When a cafe has no stock of any kind it closes down.
 
 ## Considerations
 Part of the focus of this Kata is using the type system 
