@@ -1,6 +1,6 @@
 import pytest
 
-from cafe.money import Krona
+from cafe.money import Krona, BritishPounds
 from cafe.cafe import Cafe
 from cafe.orders import Order
 from cafe.items import Item
@@ -83,4 +83,8 @@ def test_customers_cant_order_items_not_on_the_menu(cafe_one: Cafe):
     with pytest.raises(UnknownItem):
         cafe_one.place_order(Order(["coffee", "flintstones chewable morphine"]))
 
+
+def test_you_can_also_order_from_british_cafes(british_cafe: Cafe[BritishPounds]):
+    order = Order(["coffee", "coffee"])
+    assert british_cafe.place_order(order).total == BritishPounds(2)
 

@@ -2,7 +2,7 @@ import pytest
 
 from cafe.cafe import Cafe
 from cafe.items import Deal
-from cafe.money import Krona
+from cafe.money import Krona, BritishPounds
 
 
 @pytest.fixture
@@ -27,3 +27,10 @@ def cafe_two() -> Cafe:
 def cafe_without_stock() -> Cafe:
     return Cafe({"coffee": Krona(2), "fancy coffee": Krona(10), }, {"fancy coffee": Deal(2, Krona(15))})
 
+
+@pytest.fixture
+def british_cafe() -> Cafe:
+    cafe = Cafe({"coffee": BritishPounds(1), "fancy coffee": BritishPounds(2), }, {})
+    cafe.add_stock("coffee", 10)
+    cafe.add_stock("fancy coffee", 10)
+    return cafe
