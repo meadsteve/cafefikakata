@@ -23,7 +23,14 @@ def test_a_cafe_can_give_you_a_receipt_for_the_order():
     assert receipt.total == Krona(20)
 
 
-def test_a_cafe_can_run_special_offers():
+expected_deals = [
+    (Order(["kanelbulle", "kanelbulle", "kanelbulle"]), Krona(25)),
+    (Order(["kanelbulle", "kanelbulle", "kanelbulle", "kanelbulle"]), Krona(35)),
+    (Order(["kanelbulle", "kanelbulle", "kanelbulle", "coffee"]), Krona(30)),
+]
+
+
+@pytest.mark.parametrize("order,expected_price", expected_deals)
+def test_a_cafe_can_run_special_offers(order: Order, expected_price: Krona):
     cafe = Cafe()
-    order = Order(["kanelbulle", "kanelbulle", "kanelbulle"])
-    assert cafe.get_receipt(order).total == Krona(25)
+    assert cafe.get_receipt(order).total == expected_price
