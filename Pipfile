@@ -8,6 +8,7 @@ verify_ssl = true
 [packages]
 mypy = "==0.701"
 pytest = "~=4.5"
+dataclasses = "==0.6"
 
 [requires]
-python_version = "3.7"
+python_version = ">=3.6 && <4.0"
