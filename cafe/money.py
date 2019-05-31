@@ -3,7 +3,7 @@ from functools import reduce
 from typing import List, TypeVar
 
 
-@dataclass
+@dataclass(frozen=True)
 class Currency:
     amount: int
 

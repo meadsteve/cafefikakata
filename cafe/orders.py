@@ -7,11 +7,11 @@ from cafe.money import Currency
 LocalCurrency = TypeVar('LocalCurrency', bound=Currency)
 
 
-@dataclass
+@dataclass(frozen=True)
 class Order:
     items: List[Item]
 
 
-@dataclass
+@dataclass(frozen=True)
 class Receipt(Generic[LocalCurrency]):
     total: LocalCurrency

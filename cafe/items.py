@@ -10,7 +10,7 @@ LocalCurrency = TypeVar('LocalCurrency', bound=Currency)
 Item = str
 
 
-@dataclass
+@dataclass(frozen=True)
 class Deal(Generic[LocalCurrency]):
     quantity: int
     price: LocalCurrency
