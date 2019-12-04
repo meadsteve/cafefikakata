@@ -17,30 +17,25 @@ Kanelbulle - 10kr
 We get a list of items from the customer.
 What's the total?
 
-### Requirement Three - Special offers
-There's now a special offer on the bullar.
-If a customer buys 3 they only pay 25kr.
-
-### Requirement Four - Different cafes have different prices
+### Requirement Three - Different cafes have different prices
 Extend the above so we can have multiple shops with
 different prices
 
-### Requirement Four and a half - Different deals
-If you only extended the above for prices do
-the same for deals
-
-### Requirement Five - Stock levels
+### Requirement Four - Stock levels
 A cafe has limited stock. When it's sold out orders can't be
 placed for that time.
 
-### Requirement Six - Closing down
+### Requirement Five - Closing down
 When a cafe has no stock of any kind it closes down.
 
-### Requirement Seven - Let's take fika international
+### Requirement Six - Let's take fika international
 All the previous requirements dealt in Krona. 
 Now we want to launch in new countries. Each cafe
 should only work in a single currency. 
 
+### Requirement Seven - Special offers
+There's now a special offer on the bullar.
+If a customer buys 3 they only pay 25kr.
 
 ## Considerations
 Part of the focus of this Kata is using the type system 
